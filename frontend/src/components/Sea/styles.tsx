@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const SeaBackgroundWrapper = styled.div`
-  position: absolute;
+  position: relative;
   right: 0;
   left: 0;
   top: 0;

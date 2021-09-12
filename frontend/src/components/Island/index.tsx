@@ -1,18 +1,18 @@
 import React from 'react';
 import { IslandWrapper } from './styles';
-import Isl from '../../assets//01 (1).png';
 import { IslandWrapperProps } from '../../shared/interfaces';
 
 interface IslandProps extends IslandWrapperProps {
-  title: string;
+  fileName: string;
 }
 
-const Island: React.FC<IslandProps> = ({ position, title }) => {
+export const Island: React.FC<IslandProps> = ({ position, fileName }) => {
   return (
     <IslandWrapper position={position}>
-      <img src={Isl} alt={title} />
+      <img
+        src={require(`../../assets/${fileName}.png`).default}
+        alt={fileName}
+      />
     </IslandWrapper>
   );
 };
-
-export default Island;

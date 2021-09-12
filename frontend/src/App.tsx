@@ -1,14 +1,20 @@
 import React from 'react';
-import Sea from './components/Sea';
+import {
+  SeaBackground,
+  Islands,
+  WavesAnimation,
+  PiratePlayer,
+} from './components';
 import ScrollContainer from 'react-indiana-drag-scroll';
-import WavesAnimation from './components/Waves';
 
 function App() {
   return (
     <>
       <ScrollContainer vertical horizontal className='scroll'>
-        <Sea />
+        <SeaBackground />
         <WavesAnimation />
+        <PiratePlayer />
+        <Islands />
       </ScrollContainer>
     </>
   );
