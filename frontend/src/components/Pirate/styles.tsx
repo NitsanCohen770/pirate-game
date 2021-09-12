@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const PirateWrapper = styled.div`
-  position: absolute;
+  position: relative;
   right: 1459px;
   left: 279px;
   top: 197px;

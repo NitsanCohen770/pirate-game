@@ -1,9 +1,6 @@
-.sea {
-  position: absolute;
-  right: 0;
-  left: 0;
-  top: 0;
-  bottom: 0;
+body {
+  font-family: 'Heebo', sans-serif;
+  zoom: 65%;
 }
 .scroll {
   position: absolute;
@@ -11,11 +8,4 @@
   left: 0;
   top: 0;
   bottom: 0;
-}
-.rum {
-  position: absolute;
-  right: 550px;
-  left: 950px;
-  top: 223px;
-  bottom: 608px;
 }
