@@ -1,4 +1,4 @@
-import { model, Schema, Document } from 'mongoose';
+import { model, models, Schema, Document } from 'mongoose';
 import { User } from '@interfaces/users.interface';
 
 const userSchema: Schema = new Schema({
@@ -13,6 +13,6 @@ const userSchema: Schema = new Schema({
   },
 });
 
-const userModel = model<User & Document>('User', userSchema);
+const userModel = models.User || model<User & Document>('User', userSchema);
 
 export default userModel;

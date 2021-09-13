@@ -4,7 +4,7 @@ import { dbConfig } from '@interfaces/db.interface';
 const { host, port, database }: dbConfig = config.get('dbConfig');
 
 export const dbConnection = {
-  url: `mongodb://${host}:${port}/${database}`,
+  url: process.env.MONGODB_URL,
   options: {
     useNewUrlParser: true,
     useUnifiedTopology: true,

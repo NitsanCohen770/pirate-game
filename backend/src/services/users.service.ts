@@ -3,7 +3,9 @@ import { CreateUserDto } from '@dtos/users.dto';
 import { HttpException } from '@exceptions/HttpException';
 import { User } from '@interfaces/users.interface';
 import userModel from '@models/users.model';
+import usersActionsModel from '@models/logger.models';
 import { isEmpty } from '@utils/util';
+import { UserActions } from '@/interfaces/userActions';
 
 class UserService {
   public users = userModel;
@@ -62,3 +64,14 @@ class UserService {
 }
 
 export default UserService;
+
+export class UserActionsService {
+  public usersActions = usersActionsModel;
+  public async createUserAction(userActionData): Promise<UserActions> {
+    if (isEmpty(userActionData)) throw new HttpException(400, "You're not userActionData");
+
+    const createUserData: UserActions = await this.usersActions.create({ ...userActionData });
+
+    return createUserData;
+  }
+}

@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   SeaBackground,
   Islands,
@@ -8,19 +7,33 @@ import {
   ShipPlayer,
   SideBar,
 } from './components';
+import { useRecoilValue } from 'recoil';
 import ScrollContainer from 'react-indiana-drag-scroll';
+import { modalState, browseMapState } from './recoil/atoms';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 function App() {
+  const browseMap = useRecoilValue(browseMapState);
+  const isModalOpen = useRecoilValue(modalState);
+
+  useEffect(() => {
+    axios.post('http://localhost:3001/users', {
+      IP: '222.222.222.222',
+      action: 'won',
+    });
+  }, []);
+
   return (
     <>
-      {/* <Modal
-        mainText='You Win'
-        subText='You landed on an island'
-        winner={true}
-      /> */}
-      {/* <ShipPlayer /> */}
+      {isModalOpen && <Modal />}
+
       <SideBar />
-      <ScrollContainer vertical horizontal className='scroll'>
+      <ScrollContainer
+        vertical={browseMap}
+        horizontal={browseMap}
+        className='scroll'>
+        <ShipPlayer />
         <SeaBackground />
         <WavesAnimation />
         <PiratePlayer />

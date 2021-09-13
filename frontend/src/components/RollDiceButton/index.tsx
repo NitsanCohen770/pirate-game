@@ -1,15 +1,19 @@
 import React from 'react';
 import { RollDiceButtonWrapper } from './styles';
-import Dice from '../../assets/dice/2.png';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { diceState, gameState } from '../../recoil/atoms/';
 
 interface RollDiceButtonProps {}
 
 export const RollDiceButton: React.FC<RollDiceButtonProps> = () => {
-  const [diceNumber, setDiceNumber] = React.useState<number>(3);
+  const [diceNumber, setDiceNumber] = useRecoilState(diceState);
+  const setGameState = useSetRecoilState(gameState);
 
   const rollDiceHandler = () => {
     const randomNumber = Math.floor(Math.random() * 6 + 1);
     setDiceNumber(randomNumber);
+    setGameState(true);
+    console.log(diceNumber);
   };
 
   return (

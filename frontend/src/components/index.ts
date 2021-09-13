@@ -5,7 +5,6 @@ export { WavesAnimation } from './Waves';
 export { PiratePlayer } from './Pirate';
 export { ShipPlayer } from './Ship';
 export { Modal } from './Modal';
-export { DiceButton } from './Dice';
 export { SideBar } from './Sidebar';
 export { RollDiceButton } from './RollDiceButton';
 export { HandIcon } from './HandIcon';
