@@ -1,5 +1,6 @@
 import { model, models, Schema, Document } from 'mongoose';
-import { UserActions } from '@interfaces/userActions';
+
+import { UserActions } from '@/interfaces/userActions';
 
 const userActionSchema: Schema = new Schema(
   {

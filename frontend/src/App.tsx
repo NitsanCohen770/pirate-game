@@ -7,28 +7,32 @@ import {
   ShipPlayer,
   SideBar,
 } from './components';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+import { FaBars } from 'react-icons/fa';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { modalState, browseMapState } from './recoil/atoms';
-import { useEffect } from 'react';
-import axios from 'axios';
+import { sidebarDisplayState, sidebarState } from './recoil/atoms/sidebar';
 
 function App() {
   const browseMap = useRecoilValue(browseMapState);
-  const isModalOpen = useRecoilValue(modalState);
-
-  useEffect(() => {
-    axios.post('http://localhost:3001/users', {
-      IP: '222.222.222.222',
-      action: 'won',
-    });
-  }, []);
+  const toggleSidebar = useSetRecoilState(sidebarState);
+  const [displaySidebar, setDisplaySidebar] =
+    useRecoilState(sidebarDisplayState);
 
   return (
     <>
-      {isModalOpen && <Modal />}
-
+      <Modal />
       <SideBar />
+      {!displaySidebar && (
+        <FaBars
+          className='open_sidebar'
+          size='2rem'
+          onClick={() => {
+            setDisplaySidebar(true);
+            toggleSidebar(true);
+          }}
+        />
+      )}
       <ScrollContainer
         vertical={browseMap}
         horizontal={browseMap}

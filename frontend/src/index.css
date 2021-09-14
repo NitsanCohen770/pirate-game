@@ -1,6 +1,7 @@
 body {
   font-family: 'Heebo', sans-serif;
   zoom: 65%;
+  user-select: none;
 }
 .scroll {
   position: absolute;
@@ -8,4 +9,12 @@ body {
   left: 0;
   top: 0;
   bottom: 0;
+}
+
+.open_sidebar {
+  position: absolute;
+  right: 100px;
+  z-index: 3000;
+  top: 30px;
+  cursor: pointer;
 }

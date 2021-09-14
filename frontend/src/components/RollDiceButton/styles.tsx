@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const RollDiceButtonWrapper = styled.div`
+interface RollDiceButtonWrapperProps {
+  isGameStarted: boolean;
+}
+
+export const RollDiceButtonWrapper = styled.div<RollDiceButtonWrapperProps>`
   font-size: 61px;
   color: #ffffff;
   font-weight: 400;
@@ -10,4 +14,7 @@ export const RollDiceButtonWrapper = styled.div`
   border-radius: 10px;
   background-color: #db4d00;
   cursor: pointer;
+  box-shadow: 10px 2px 5px -3px #888;
+  pointer-events: ${({ isGameStarted }) => isGameStarted && 'none'};
+  user-select: none;
 `;

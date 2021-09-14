@@ -1,12 +1,6 @@
 import styled from 'styled-components';
-import { shipAnimation } from '../../data/shipAnimations';
 
-interface ShipWrapperProps {
-  diceNumber: number;
-  isGameStart: boolean;
-}
-
-export const ShipWrapper = styled.div<ShipWrapperProps>`
+export const ShipWrapper = styled.div`
   position: absolute;
   right: 0;
   left: -90px;
@@ -14,15 +8,61 @@ export const ShipWrapper = styled.div<ShipWrapperProps>`
   bottom: 0;
   height: 100%;
   transition: all 1s ease-in-out;
-  animation: ${({ isGameStart }) => isGameStart && 'ship 20s linear'};
-  z-index: 2000;
+  animation: ship 30s linear infinite;
+  z-index: 1000;
+  opacity: 1;
 
   @keyframes ship {
-    from {
-      transform: rotate(0deg) translateX(150px);
+    0% {
+      top: 300px;
+      left: 0;
+      opacity: 1;
     }
-    to {
-      transform: rotate(360deg) translateX(150px);
+    20% {
+      top: 400px;
+      left: 400px;
+      opacity: 1;
+    }
+    30% {
+      top: 600px;
+      left: 600px;
+      opacity: 1;
+    }
+    40% {
+      top: 800px;
+      left: 800px;
+      opacity: 1;
+    }
+    50% {
+      top: 900px;
+      left: 1000px;
+      opacity: 1;
+    }
+    60% {
+      top: 1000px;
+      left: 1100px;
+      opacity: 1;
+    }
+    70% {
+      top: 1100px;
+      left: 1300px;
+    }
+    80% {
+      top: 1200px;
+      left: 1400px;
+      transform: rotate(-20deg);
+    }
+    90% {
+      top: 1200px;
+      left: 1900px;
+      transform: rotate(-20deg);
+      opacity: 0.5;
+    }
+    100% {
+      top: 1200px;
+      left: 2200px;
+      transform: rotate(-20deg);
+      opacity: 0;
     }
   }
 `;

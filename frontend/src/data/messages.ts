@@ -5,20 +5,20 @@ export const messages = [
     subText: 'You Lose!',
     winner: false,
   },
-
+  null,
   {
     mainText: 'You were eaten by a Dragon!',
     subText: 'You Lose!',
     winner: false,
   },
   {
-    mainText: 'You found the tressure!',
+    mainText: 'You found the treasure!',
     subText: 'You Win!',
     winner: true,
   },
   null,
   {
-    mainText: 'You got the island, your life was saved!',
+    mainText: 'You got to the island, your life was saved!',
     subText: 'You Win!',
     winner: true,
   },

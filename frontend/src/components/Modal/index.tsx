@@ -1,32 +1,71 @@
-import React from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import React, { useEffect, useState } from 'react';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { useQuery } from 'react-query';
 import { fetchRandomMessage } from '../../API/fetchRandomMessage';
 import { messages, rumMessages } from '../../data/messages';
-import { diceState, modalState } from '../../recoil/atoms';
+import {
+  diceState,
+  gameState,
+  modalState,
+  sidebarState,
+} from '../../recoil/atoms';
 import { ModalWrapper } from './styles';
+import { sidebarDisplayState } from '../../recoil/atoms/sidebar';
+
+interface ModalMessages {
+  mainText: string;
+  subText: string | undefined;
+  winner: boolean;
+}
 
 export const Modal: React.FC = () => {
-  const toggleModal = useSetRecoilState(modalState);
+  const [isModalOpen, toggleModal] = useRecoilState(modalState);
   const diceNumber = useRecoilValue(diceState);
-  const { data, error, isError, isLoading } = useQuery(
-    'posts',
-    fetchRandomMessage
+  const resetGame = useSetRecoilState(gameState);
+  const toggleSidebar = useSetRecoilState(sidebarState);
+  const toggleSidebarDisplay = useSetRecoilState(sidebarDisplayState);
+  const [modalMessages, setModalMessages] = useState<ModalMessages | null>(
+    messages[diceNumber]
   );
+  const [funnyMessage, setFunnyMessage] =
+    useState<{ message: string | undefined } | null>(null);
 
-  let modalMessages = (() => messages[diceNumber])();
-  if (!modalMessages) {
+  useEffect(() => {
+    if (diceNumber === 5) {
+      (async () => {
+        const { data } = await fetchRandomMessage();
+        setFunnyMessage(data);
+      })();
+    }
+  }, [diceNumber]);
+
+  useEffect(() => {
     const randomNumber = Math.round(Math.random());
-    if (diceNumber === 2) modalMessages = rumMessages[randomNumber];
-    else if (diceNumber === 4) modalMessages = data;
-  }
+    if (diceNumber === 2) {
+      return setModalMessages(rumMessages[randomNumber]);
+    }
+    if (diceNumber === 5) {
+      setModalMessages({
+        mainText: '',
+        subText: funnyMessage?.message,
+        winner: true,
+      });
+    }
+  }, [diceNumber, funnyMessage]);
+
+  const resetGameHandler = () => {
+    toggleModal(false);
+    resetGame(false);
+    toggleSidebar(true);
+    toggleSidebarDisplay(true);
+  };
 
   return (
-    <ModalWrapper>
+    <ModalWrapper isModalOpen={isModalOpen}>
       <h2>{modalMessages?.winner ? 'Great' : 'Oh, too bad!'}</h2>
       <h2>{modalMessages?.subText}</h2>
       <h1>{modalMessages?.mainText}</h1>
-      <button onClick={() => toggleModal(false)}>Try Again</button>
+      <button onClick={resetGameHandler}>Try Again</button>
     </ModalWrapper>
   );
 };

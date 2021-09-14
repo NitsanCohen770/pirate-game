@@ -1,24 +1,31 @@
 import React from 'react';
 import { RollDiceButtonWrapper } from './styles';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { diceState, gameState } from '../../recoil/atoms/';
+import { diceState, gameState, sidebarState } from '../../recoil/atoms/';
+import { useMutation } from 'react-query';
+import { createUserAction } from '../../API/createUserAction';
 
-interface RollDiceButtonProps {}
-
-export const RollDiceButton: React.FC<RollDiceButtonProps> = () => {
+export const RollDiceButton: React.FC = () => {
   const [diceNumber, setDiceNumber] = useRecoilState(diceState);
-  const setGameState = useSetRecoilState(gameState);
+  const [isGameStarted, setGameState] = useRecoilState(gameState);
+  const toggleSidebar = useSetRecoilState(sidebarState);
+  const { mutate } = useMutation(createUserAction, {
+    retry: 3,
+  });
 
   const rollDiceHandler = () => {
-    const randomNumber = Math.floor(Math.random() * 6 + 1);
+    const randomNumber = 5;
+    mutate({ action: `Game started, player rolled ${randomNumber}` });
     setDiceNumber(randomNumber);
     setGameState(true);
-    console.log(diceNumber);
+    toggleSidebar(false);
   };
 
   return (
     <>
-      <RollDiceButtonWrapper onClick={rollDiceHandler}>
+      <RollDiceButtonWrapper
+        onClick={rollDiceHandler}
+        isGameStarted={isGameStarted}>
         Roll Dice
       </RollDiceButtonWrapper>
       <img

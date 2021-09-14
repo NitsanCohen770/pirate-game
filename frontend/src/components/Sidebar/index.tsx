@@ -1,14 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import { HandIcon, RollDiceButton } from '..';
+import { FaWindowClose } from 'react-icons/fa';
 import { SidebarWrapper } from './styles';
+import { sidebarState } from '../../recoil/atoms';
+import { sidebarDisplayState } from '../../recoil/atoms/sidebar';
 
 interface SideBarProps {}
 
 export const SideBar: React.FC<SideBarProps> = () => {
+  const [isSidebarOpen, toggleSidebar] = useRecoilState(sidebarState);
+  const [displaySidebar, setDisplaySidebar] =
+    useRecoilState(sidebarDisplayState);
+
+  const displaySidebarHandler = () =>
+    isSidebarOpen ? setDisplaySidebar(true) : setDisplaySidebar(false);
+
   return (
-    <SidebarWrapper>
-      <HandIcon />
-      <RollDiceButton />
-    </SidebarWrapper>
+    <>
+      <SidebarWrapper
+        isSidebarOpen={isSidebarOpen}
+        displaySidebar={displaySidebar}
+        onAnimationEnd={displaySidebarHandler}>
+        <FaWindowClose
+          className='close-button'
+          size='2rem'
+          onClick={() => toggleSidebar(false)}
+        />
+        <HandIcon />
+        <RollDiceButton />
+      </SidebarWrapper>
+    </>
   );
 };

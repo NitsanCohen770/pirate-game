@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-export const ModalWrapper = styled.div`
+export const ModalWrapper = styled.div<{ isModalOpen: boolean }>`
   position: absolute;
   display: flex;
+  visibility: ${({ isModalOpen }) => !isModalOpen && 'hidden'};
   flex-direction: column;
   justify-content: center;
   align-items: center;

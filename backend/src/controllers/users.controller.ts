@@ -1,40 +1,17 @@
 import { NextFunction, Request, Response } from 'express';
-import { CreateUserDto } from '@dtos/users.dto';
-import { User } from '@interfaces/users.interface';
-import userService from '@services/users.service';
-import { UserActionsService } from '@services/users.service';
+import { MessagesService, UserActionsService } from '@services/users.service';
+import { UserActions } from '@/interfaces/userActions';
+import { FunnyMessage } from '@/interfaces/funnyMessage';
 
 class UsersController {
-  public userService = new userService();
   public userActionsService = new UserActionsService();
+  public messagesService = new MessagesService();
 
-  public getUsers = async (req: Request, res: Response, next: NextFunction) => {
+  public getRandomMessage = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const findAllUsersData: User[] = await this.userService.findAllUser();
-
-      res.status(200).json({ data: findAllUsersData, message: 'findAll' });
-    } catch (error) {
-      next(error);
-    }
-  };
-
-  public getUserById = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const userId: string = req.params.id;
-      const findOneUserData: User = await this.userService.findUserById(userId);
-
-      res.status(200).json({ data: findOneUserData, message: 'findOne' });
-    } catch (error) {
-      next(error);
-    }
-  };
-
-  public createUser = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const userData: CreateUserDto = req.body;
-      const createUserData: User = await this.userService.createUser(userData);
-
-      res.status(201).json({ data: createUserData, message: 'created' });
+      const findRandomMessage: FunnyMessage = await this.messagesService.getRandomMessage();
+      const randomFunnyMessage = { message: findRandomMessage[0].message };
+      res.status(200).json({ data: randomFunnyMessage });
     } catch (error) {
       next(error);
     }
@@ -43,32 +20,11 @@ class UsersController {
   public createUserAction = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userActionData = req.body;
-      const createUserData: User = await this.userActionsService.createUserAction(userActionData);
+      const IP = req.ip;
+      const newUserAction = { ...userActionData, IP };
+      const createUserData: UserActions = await this.userActionsService.createUserAction(newUserAction);
 
       res.status(201).json({ data: createUserData, message: 'created' });
-    } catch (error) {
-      next(error);
-    }
-  };
-
-  public updateUser = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const userId: string = req.params.id;
-      const userData: CreateUserDto = req.body;
-      const updateUserData: User = await this.userService.updateUser(userId, userData);
-
-      res.status(200).json({ data: updateUserData, message: 'updated' });
-    } catch (error) {
-      next(error);
-    }
-  };
-
-  public deleteUser = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const userId: string = req.params.id;
-      const deleteUserData: User = await this.userService.deleteUser(userId);
-
-      res.status(200).json({ data: deleteUserData, message: 'deleted' });
     } catch (error) {
       next(error);
     }
