@@ -10,7 +10,7 @@ export const ModalWrapper = styled.div<{ isModalOpen: boolean }>`
   top: 50%;
   left: 50%;
   width: 80vw;
-  height: 80vh;
+  height: fit-content;
   transform: translate(-50%, -50%);
   border-radius: 10px;
   background-color: #000000;
@@ -25,5 +25,23 @@ export const ModalWrapper = styled.div<{ isModalOpen: boolean }>`
     height: fit-content;
     margin: 0 0 0 0;
     font-weight: 50;
+  }
+  .restart_button {
+    display: inline-flex;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: yellowgreen;
+    color: #f2f4fe;
+    height: fit-content;
+    width: fit-content;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.8125rem;
+    line-height: 1.1875rem;
+    &:hover {
+      opacity: 0.8;
+    }
   }
 `;

@@ -14,12 +14,12 @@ export const ShipWrapper = styled.div`
 
   @keyframes ship {
     0% {
-      top: 300px;
+      top: 500px;
       left: 0;
       opacity: 1;
     }
     20% {
-      top: 400px;
+      top: 550px;
       left: 400px;
       opacity: 1;
     }

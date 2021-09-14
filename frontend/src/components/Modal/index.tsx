@@ -28,7 +28,7 @@ export const Modal: React.FC = () => {
     messages[diceNumber]
   );
   const [funnyMessage, setFunnyMessage] =
-    useState<{ message: string | undefined } | null>(null);
+    useState<{ message: string } | null>(null);
 
   useEffect(() => {
     if (diceNumber === 5) {
@@ -40,6 +40,7 @@ export const Modal: React.FC = () => {
   }, [diceNumber]);
 
   useEffect(() => {
+    setModalMessages(messages[diceNumber]);
     const randomNumber = Math.round(Math.random());
     if (diceNumber === 2) {
       return setModalMessages(rumMessages[randomNumber]);
@@ -65,7 +66,9 @@ export const Modal: React.FC = () => {
       <h2>{modalMessages?.winner ? 'Great' : 'Oh, too bad!'}</h2>
       <h2>{modalMessages?.subText}</h2>
       <h1>{modalMessages?.mainText}</h1>
-      <button onClick={resetGameHandler}>Try Again</button>
+      <div className='restart_button' onClick={resetGameHandler}>
+        Try Again
+      </div>
     </ModalWrapper>
   );
 };

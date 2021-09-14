@@ -14,7 +14,7 @@ export const RollDiceButton: React.FC = () => {
   });
 
   const rollDiceHandler = () => {
-    const randomNumber = 5;
+    const randomNumber = Math.floor(Math.random() * 6 + 1);
     mutate({ action: `Game started, player rolled ${randomNumber}` });
     setDiceNumber(randomNumber);
     setGameState(true);
