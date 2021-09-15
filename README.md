@@ -50,7 +50,8 @@ I did not have the time to deploy the app yet.
 - [Node.js] - A JS runtime serverside.
 - [Express] - Node.js framework
 - [TypeScript-express boilerplate](https://www.npmjs.com/package/typescript-express-starter) - For faster developing
-  **Note: These are just examples. Delete this note and replace the list above with your own choices**
+- [MongoDB(Atlas)] - As a DB.
+- [Mongoose] - A MongoDB framework.
 
 ### Continued development
 
