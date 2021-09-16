@@ -5,7 +5,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useMutation } from 'react-query';
 import { gameState, diceState, modalState } from '../../recoil/atoms';
 import { createUserAction } from '../../API/createUserAction';
-import { messages, rumMessages } from '../../data/messages';
+import { messages } from '../../data/messages';
 
 export const PiratePlayer: React.FC = () => {
   const isGameStart = useRecoilValue(gameState);
@@ -15,6 +15,8 @@ export const PiratePlayer: React.FC = () => {
   const { mutate } = useMutation(createUserAction, {
     retry: 3,
   });
+
+  console.log(diceNumber);
 
   const gameEndHandler = () => {
     mutate({
@@ -33,6 +35,7 @@ export const PiratePlayer: React.FC = () => {
       inline: 'center',
     });
   }, []);
+
   return (
     <PirateWrapper
       onAnimationEnd={gameEndHandler}

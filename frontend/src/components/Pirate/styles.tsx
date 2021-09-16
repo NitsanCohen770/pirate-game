@@ -13,12 +13,12 @@ export const PirateWrapper = styled.div<PirateWrapperProps>`
   top: 197px;
   bottom: 611px;
   z-index: 1000;
-  animation: ${({ isGameStart }) =>
-    isGameStart && 'pirate 10s ease-in-out 0s forwards'};
+  animation: ${({ isGameStart, diceNumber }) =>
+    isGameStart &&
+    `pirate${diceNumber} ${diceNumber * 2}s ease-in-out 0s forwards`};
 
-  @keyframes pirate {
-    ${({ diceNumber }) => pirateAnimation[diceNumber]}
-  }
+  ${pirateAnimation.map(
+    (pirateKeyframe, index) => `@keyframes pirate${index} {
+   ${pirateKeyframe} }`
+  )}
 `;
-
-// ${({ diceNumber }) => pirateAnimation[diceNumber]}
