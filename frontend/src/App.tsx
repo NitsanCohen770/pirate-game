@@ -10,7 +10,7 @@ import {
 import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 import { FaBars } from 'react-icons/fa';
 import ScrollContainer from 'react-indiana-drag-scroll';
-import { modalState, browseMapState } from './recoil/atoms';
+import { browseMapState } from './recoil/atoms';
 import { sidebarDisplayState, sidebarState } from './recoil/atoms/sidebar';
 
 function App() {
@@ -18,6 +18,11 @@ function App() {
   const toggleSidebar = useSetRecoilState(sidebarState);
   const [displaySidebar, setDisplaySidebar] =
     useRecoilState(sidebarDisplayState);
+
+  const openSidebarHandler = () => {
+    setDisplaySidebar(true);
+    toggleSidebar(true);
+  };
 
   return (
     <>
@@ -27,10 +32,7 @@ function App() {
         <FaBars
           className='open_sidebar'
           size='2rem'
-          onClick={() => {
-            setDisplaySidebar(true);
-            toggleSidebar(true);
-          }}
+          onClick={openSidebarHandler}
         />
       )}
       <ScrollContainer

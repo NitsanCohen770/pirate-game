@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { useQuery } from 'react-query';
 import { fetchRandomMessage } from '../../API/fetchRandomMessage';
 import { messages, rumMessages } from '../../data/messages';
 import {

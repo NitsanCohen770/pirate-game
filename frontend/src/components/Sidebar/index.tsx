@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useRecoilState } from 'recoil';
 import { HandIcon, RollDiceButton } from '..';
 import { FaWindowClose } from 'react-icons/fa';
