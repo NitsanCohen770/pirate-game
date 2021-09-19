@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useMediaQuery } from 'react-responsive';
 import { fetchRandomMessage } from '../../API/fetchRandomMessage';
 import { messages, rumMessages } from '../../data/messages';
 import {
@@ -19,6 +20,7 @@ interface ModalMessages {
 
 export const Modal: React.FC = () => {
   const [isModalOpen, toggleModal] = useRecoilState(modalState);
+  const isBigScreen = useMediaQuery({ query: '(min-width: 1000px)' });
   const diceNumber = useRecoilValue(diceState);
   const resetGame = useSetRecoilState(gameState);
   const toggleSidebar = useSetRecoilState(sidebarState);

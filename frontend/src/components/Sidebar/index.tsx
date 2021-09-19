@@ -6,9 +6,7 @@ import { SidebarWrapper } from './styles';
 import { sidebarState } from '../../recoil/atoms';
 import { sidebarDisplayState } from '../../recoil/atoms/sidebar';
 
-interface SideBarProps {}
-
-export const SideBar: React.FC<SideBarProps> = () => {
+export const SideBar: React.FC = () => {
   const [isSidebarOpen, toggleSidebar] = useRecoilState(sidebarState);
   const [displaySidebar, setDisplaySidebar] =
     useRecoilState(sidebarDisplayState);

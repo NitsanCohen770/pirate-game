@@ -22,6 +22,7 @@ export const SidebarWrapper = styled.aside<SidebarWrapperProps>`
   display: ${({ displaySidebar }) => displaySidebar && 'flex'};
   animation: ${({ isSidebarOpen }) => !isSidebarOpen && 'fadeOut 2s linear'};
   display: ${({ displaySidebar }) => !displaySidebar && 'none'};
+
   @keyframes fadeIn {
     0% {
       opacity: 0;
