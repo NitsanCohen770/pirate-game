@@ -29,7 +29,7 @@ Users should be able to:
 
 ### Links
 
-I did not have the time to deploy the app yet.
+- Deployed - [Pirate-Game](https://assafmedia-game.netlify.app/)
 
 ## My process
 
